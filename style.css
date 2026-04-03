@@ -1,0 +1,143 @@
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+
+
+color: #2bb8b3;
+}
+.index{
+background-position: center;   /* ✅ centers image */
+background-image: url(bgim.jpeg);
+background-size: cover;        /* ✅ fills entire screen */
+background-repeat: no-repeat;  /* ✅ stops repetition */
+
+}
+
+/* Center container */
+.container {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+text-align: center;
+ 
+}
+.form-container{
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 900px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;  
+    gap: 10px; 
+    
+}
+
+/* Title */
+.title {
+font-size: 5rem;
+margin-bottom: 10px;
+}
+
+/* Subtitle */
+.subtitle {
+font-size: 1.5rem;
+margin-bottom: 30px;
+color:black;
+}
+
+/* Button */
+.btn {
+padding: 12px 30px;
+font-size: 1.1rem;
+border: none;
+border-radius: 25px;
+background-color: #00c9a7;
+color: white;
+cursor: pointer;
+transition: 0.3s;
+}
+
+.btn:hover {
+background-color: #00a78e;
+}
+form {
+    display: flex;
+    flex-direction: column;  /* 🔥 makes everything vertical */
+    gap: 10px;
+}
+
+form input,
+form select {
+    width: 100%;            /* full width */
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container2 {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2d1674;
+    color: white;
+    padding: 20px;
+}
+
+.logo {
+    text-align: left;
+    margin-bottom: 30px;
+    font-weight: bolder;
+    color: #2d1674;
+    
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    padding: 12px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.menu li:hover {
+    background-color:#2d1674;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f1f5f9;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    font-size: 2rem;
+    color: #2d1674;
+
+}
+.healthhack{
+    background-color: white;
+
+   ;
+}
+
+
+
