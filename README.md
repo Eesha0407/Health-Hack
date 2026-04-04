@@ -2,7 +2,7 @@
 
 > **Train Smarter. Not Harder. Powered by Medical-Grade Graph Intelligence.**
 
-HealthHack 2.0 is a next-generation fitness and health-tech application designed for a hackathon demo. Unlike generic fitness trackers, HealthHack 2.0 acts as a **"Graph-powered decision engine for safe training."** It uses Knowledge Graph concepts to dynamically analyze a user's biometric data, fitness goals, and active injuries to prune contraindicated exercises and route them to safe alternatives.
+HealthHack 2.0 is a next-generation fitness and health-tech application designed for a hackathon demo by team ByteFours. Unlike generic fitness trackers, HealthHack 2.0 acts as a **"Graph-powered decision engine for safe training."** It uses Knowledge Graph concepts to dynamically analyze a user's biometric data, fitness goals, and active injuries to prune contraindicated exercises and route them to safe alternatives.
 
 ---
 
