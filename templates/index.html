@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class ="index">
+
+```
+<div class="container">
+    <h1 class="title">HealthHack 2.0</h1>
+    <p class="subtitle">Your AI-powered Safe Fitness Guide</p>
+
+    <a href="secondpage.html">
+        <button class="btn">Get Started</button>
+    </a>
+</div>
+```
+<select id="injurySelect" onchange="updateWorkouts()">
+    <option value="No Injury">No Injury</option>
+    <option value="Knee Pain">Knee Pain</option>
+    <option value="Lower Back Pain">Lower Back Pain</option>
+    <option value="Wrist Pain">Wrist Pain</option>
+    <option value="Shoulder Injury">Shoulder Injury</option>
+</select>
+
+<ul id="workoutList">
+    </ul>
+
+<script>
+    async function updateWorkouts() {
+        const injury = document.getElementById('injurySelect').value;
+        const listElement = document.getElementById('workoutList');
+        
+        listElement.innerHTML = "<li>Consulting the Graph...</li>";
+
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/api/get_safe_workouts?injury=${encodeURIComponent(injury)}`);
+            const data = await response.json();
+            
+            listElement.innerHTML = ""; // Clear the loading message
+            
+            data.safe_exercises.forEach(ex => {
+                const li = document.createElement('li');
+                li.textContent = ex;
+                listElement.appendChild(li);
+            });
+        } catch (error) {
+            listElement.innerHTML = "<li>Error connecting to backend</li>";
+            console.error(error);
+        }
+    }
+</script>
+
+</body>
+</html>

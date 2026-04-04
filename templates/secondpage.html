@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="index">
+
+    ```
+    <div class="form-container">
+        <h1>Enter Your Details</h1>
+
+        <form action="dashboard.html">
+            <!-- Name -->
+            <label>Name:</label>
+            <input type="text" placeholder="Enter your name" required>
+
+            <!-- Age -->
+            <label>Age:</label>
+            <input type="number" placeholder="Enter your age" required>
+
+            <!-- Injury Dropdown -->
+            <label>Injury:</label>
+            <select>
+                <option value="">Select Injury</option>
+                <option>Lower Back Pain</option>
+                <option>Knee Pain</option>
+                <option>Wrist Pain</option>
+                <option>Shoulder Injury</option>
+                <option>No Injury</option>
+            </select>
+
+            <!-- Food Preference -->
+            <label>Food Preference:</label>
+            <select>
+                <option value="">Select Preference</option>
+                <option>Vegetarian</option>
+                <option>Vegan</option>
+                <option>Non-Vegetarian</option>
+            </select>
+
+            <!-- Fitness Goal -->
+            <label>Fitness Goal:</label>
+            <select>
+                <option value="">Select Goal</option>
+                <option>Weight Loss</option>
+                <option>Muscle Gain</option>
+                <option>General Fitness</option>
+                <option>Rehabilitation</option>
+            </select>
+
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+    ```
+<button class="btn" onclick="saveAndGo()">Go to Dashboard</button>
+
+<script>
+    function saveAndGo() {
+        const injuryValue = document.getElementById('injury').value;
+        // Save the injury to the browser's memory
+        localStorage.setItem('userInjury', injuryValue);
+        // Move to the dashboard
+        window.location.href = "dashboard.html";
+    }
+</script>
+
+</body>
+
+</html>
