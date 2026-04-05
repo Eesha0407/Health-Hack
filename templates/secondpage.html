@@ -1,75 +1,64 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>User Details</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body class="index">
-
-    ```
     <div class="form-container">
         <h1>Enter Your Details</h1>
-
-        <form action="dashboard.html">
-            <!-- Name -->
+        <form onsubmit="event.preventDefault(); saveAndGo();">
             <label>Name:</label>
-            <input type="text" placeholder="Enter your name" required>
+            <input type="text" id="userName" placeholder="Enter your name" required>
 
-            <!-- Age -->
             <label>Age:</label>
-            <input type="number" placeholder="Enter your age" required>
+            <input type="number" id="userAge" placeholder="Enter your age" required>
 
-            <!-- Injury Dropdown -->
             <label>Injury:</label>
-            <select>
-                <option value="">Select Injury</option>
-                <option>Lower Back Pain</option>
-                <option>Knee Pain</option>
-                <option>Wrist Pain</option>
-                <option>Shoulder Injury</option>
-                <option>No Injury</option>
+            <select id="userInjury">
+                <option value="No Injury">No Injury</option>
+                <option value="Lower Back Pain">Lower Back Pain</option>
+                <option value="Knee Pain">Knee Pain</option>
+                <option value="Wrist Pain">Wrist Pain</option>
+                <option value="Shoulder Injury">Shoulder Injury</option>
             </select>
 
-            <!-- Food Preference -->
             <label>Food Preference:</label>
-            <select>
-                <option value="">Select Preference</option>
-                <option>Vegetarian</option>
-                <option>Vegan</option>
-                <option>Non-Vegetarian</option>
+            <select id="userPreference">
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Non-Vegetarian">Non-Vegetarian</option>
             </select>
 
-            <!-- Fitness Goal -->
             <label>Fitness Goal:</label>
-            <select>
-                <option value="">Select Goal</option>
-                <option>Weight Loss</option>
-                <option>Muscle Gain</option>
-                <option>General Fitness</option>
-                <option>Rehabilitation</option>
+            <select id="userGoal">
+                <option value="General Fitness">General Fitness</option>
+                <option value="Weight Loss">Weight Loss</option>
+                <option value="Muscle Gain">Muscle Gain</option>
+                <option value="Rehabilitation">Rehabilitation</option>
             </select>
 
-
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn">Submit & Go to Dashboard</button>
         </form>
     </div>
-    ```
-<button class="btn" onclick="saveAndGo()">Go to Dashboard</button>
 
-<script>
+    <script>
     function saveAndGo() {
-        const injuryValue = document.getElementById('injury').value;
-        // Save the injury to the browser's memory
-        localStorage.setItem('userInjury', injuryValue);
-        // Move to the dashboard
+        const name = document.getElementById('userName').value;
+        const age = document.getElementById('userAge').value;
+        const injury = document.getElementById('userInjury').value;
+        const preference = document.getElementById('userPreference').value;
+        const goal = document.getElementById('userGoal').value;
+
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userAge', age);
+        localStorage.setItem('userInjury', injury);
+        localStorage.setItem('userPreference', preference);
+        localStorage.setItem('userGoal', goal);
+
         window.location.href = "dashboard.html";
     }
-</script>
-
+    </script>
 </body>
-
 </html>
