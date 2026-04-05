@@ -1,109 +1,97 @@
-body {
-margin: 0;
-font-family: Arial, sans-serif;
-
-
-color: #2bb8b3;
-}
-.index{
-background-position: center;   /* ✅ centers image */
-background-image: url(bgim.jpeg);
-background-size: cover;        /* ✅ fills entire screen */
-background-repeat: no-repeat;  /* ✅ stops repetition */
-
-}
-
-/* Center container */
-.container {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-height: 100vh;
-text-align: center;
- 
-}
-.form-container{
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    width: 900px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;  
-    gap: 10px; 
-    
-}
-
-/* Title */
-.title {
-font-size: 5rem;
-margin-bottom: 10px;
-}
-
-/* Subtitle */
-.subtitle {
-font-size: 1.5rem;
-margin-bottom: 30px;
-color:black;
-}
-
-/* Button */
-.btn {
-padding: 12px 30px;
-font-size: 1.1rem;
-border: none;
-border-radius: 25px;
-background-color: #00c9a7;
-color: white;
-cursor: pointer;
-transition: 0.3s;
-}
-
-.btn:hover {
-background-color: #00a78e;
-}
-form {
-    display: flex;
-    flex-direction: column;  /* 🔥 makes everything vertical */
-    gap: 10px;
-}
-
-form input,
-form select {
-    width: 100%;            /* full width */
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+body {
+    margin: 0;
+    background-color: #f1f5f9;
+}
+
+/* ------------------------------------- */
+/* 1. Landing Page & Forms (index & secondpage) */
+/* ------------------------------------- */
+
+.index {
+    background-image: url('bgim.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    /* Flexbox properties to center the inner containers */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Centered Card Style for the Start and Details pages */
+.container, .form-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+}
+
+/* Form Specific Layout */
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-container label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #2d1674;
+}
+
+.form-container input, .form-container select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-container input:focus, .form-container select:focus {
+    border-color: #00c9a7;
+}
+
+.form-container .btn {
+    margin-top: 25px;
+    width: 100%;
+}
+
+
+/* ------------------------------------- */
+/* 2. Dashboard Layout (Sidebar)         */
+/* ------------------------------------- */
 
 .container2 {
     display: flex;
 }
 
-/* Sidebar */
 .sidebar {
-    width: 250px;
+    width: 260px;
     height: 100vh;
     background-color: #2d1674;
-    color: white;
-    padding: 20px;
+    padding: 30px 20px;
+    position: fixed;
 }
 
 .logo {
-    text-align: left;
-    margin-bottom: 30px;
-    font-weight: bolder;
-    color: #2d1674;
-    
+    color: #ffffff !important; 
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 40px;
 }
 
 .menu {
@@ -111,55 +99,66 @@ form select {
 }
 
 .menu li {
+    margin-bottom: 15px;
+}
+
+.menu a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: block;
     padding: 12px;
-    margin: 10px 0;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1.2rem;
+    border-radius: 10px;
+    transition: 0.3s;
 }
 
-.menu li:hover {
-    background-color:#2d1674;
+.menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
-/* Main Content */
+
+/* ------------------------------------- */
+/* 3. Dashboard Main Content & Cards     */
+/* ------------------------------------- */
+
 .main-content {
+    margin-left: 260px; /* Offset for the fixed sidebar */
     flex: 1;
-    padding: 30px;
-    background-color: #f1f5f9;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bolder;
-    font-size: 2rem;
+    padding: 40px;
+    min-height: 100vh;
+}
+
+h1 {
     color: #2d1674;
-
-}
-.healthhack{
-    background-color: white;
-
-   ;
+    margin-bottom: 20px;
 }
 
-/* Container for the exercises */
-#workoutResults {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
-
-/* The Exercise Card */
-.exercise-card {
+/* Card Components (The "White Rectangles") */
+.card, .stat-card {
     background: white;
-    border-top: 4px solid #2ecc71; /* A "Safety" green top border */
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    font-weight: bold;
-    color: #34495e;
-    transition: all 0.3s ease;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
 }
 
-.exercise-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.15);
+
+/* ------------------------------------- */
+/* 4. Global Components                  */
+/* ------------------------------------- */
+
+.btn {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #00c9a7;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #00a78e;
 }
