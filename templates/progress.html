@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHack - Progress Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for progress layout */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .progress-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .stat-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 10px solid #00c9a7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            color: #2d1674;
+        }
+        .activity-bar {
+            height: 30px;
+            background: #eee;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .activity-fill {
+            height: 100%;
+            background: linear-gradient(to right, #00c9a7, #2d1674);
+            border-radius: 15px;
+            transition: width 1s ease-in-out;
+        }
+        .day-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container2">
+    <!-- Sidebar (Consistent with all pages) -->
+    <div class="sidebar">
+        <div class="healthhack">
+            <h1 class="logo" style="color: white;">HealthHack</h1>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html" style="color: white; text-decoration: none;">🏠 Dashboard</a></li>
+            <li><a href="nutrition.html" style="color: white; text-decoration: none;">🥗 Nutrition</a></li>
+            <li><a href="workouts.html" style="color: white; text-decoration: none;">💪 Safe Workouts</a></li>
+            <li><a href="injuries.html" style="color: white; text-decoration: none;">🩺 Injuries</a></li>
+            <li><a href="progress.html" style="color: white; text-decoration: none;">📊 Progress</a></li>
+            <li><a href="settings.html" style="color: white; text-decoration: none;">⚙️ Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" style="padding: 40px; width: 100%;">
+        <h1 id="userTitle">Your Fitness Journey</h1>
+        <p class="subtitle">Visualizing your path to <span id="goalText">...</span>.</p>
+
+        <div class="progress-grid">
+            <!-- Overall Consistency -->
+            <div class="progress-card" style="text-align: center;">
+                <h3>Workout Consistency</h3>
+                <p style="color: #666; margin-bottom: 20px;">Days active this month</p>
+                <div class="stat-circle">
+                    18/30
+                </div>
+                <p><strong>Great job!</strong> You're on a 5-day streak.</p>
+            </div>
+
+            <!-- Goal Completion -->
+            <div class="progress-card">
+                <h3>Goal Completion</h3>
+                <p style="color: #666; margin-bottom: 20px;">Progress toward your target</p>
+                
+                <div class="day-label">
+                    <span>Current Progress</span>
+                    <span>65%</span>
+                </div>
+                <div class="activity-bar">
+                    <div class="activity-fill" style="width: 65%;"></div>
+                </div>
+                <p style="font-size: 0.85rem; margin-top: 10px;">Based on your <strong>Graph-Verified</strong> workout completion rate.</p>
+            </div>
+
+            <!-- Weekly Activity -->
+            <div class="progress-card" style="grid-column: span 2;">
+                <h3>Weekly Activity Overview</h3>
+                <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 20px;">
+                    <!-- Mon -->
+                    <div style="text-align: center;">
+                        <div style="background: #00c9a7; height: 80px; border-radius: 5px;"></div>
+                        <span style="font-size: 0.8rem;">Mon</span>
+                    </div>
+                    <!-- Tue -->
+                    <div style="text-align: center;">
+                        <div style="background: #2d1674; height: 40px; border-radius: 5px;"></div>
+                        <span style="font-size: 0.8rem;">Tue</span>
+                    </div>
+                    <!-- Wed -->
+                    <div style="text-align: center;">
+                        <div style="background: #00c9a7; height: 100px; border-radius: 5px;"></div>
+                        <span style="font-size: 0.8rem;">Wed</span>
+                    </div>
+                    <!-- Thu -->
+                    <div style="text-align: center;">
+                        <div style="background: #eee; height: 10px; border-radius: 5px;"></div>
+                        <span style="font-size: 0.8rem;">Thu</span>
+                    </div>
+                    <!-- Fri -->
+                    <div style="text-align: center;">
+                        <div style="background: #00c9a7; height: 60px; border-radius: 5px;"></div>
+                        <span style="font-size: 0.8rem;">Fri</span>
+                    </div>
+                    <!-- Sat -->
+                    <div style="text-align: center;">
+                        <div style="background: #00c9a7; height: 120px; border-radius: 5px;"></div>
+                        <span style="font-size: 0.8rem;">Sat</span>
+                    </div>
+                    <!-- Sun -->
+                    <div style="text-align: center;">
+                        <div style="background: #eee; height: 10px; border-radius: 5px;"></div>
+                        <span style="font-size: 0.8rem;">Sun</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        const name = localStorage.getItem('userName') || "User";
+        const goal = localStorage.getItem('userGoal') || "General Fitness";
+        
+        document.getElementById('userTitle').innerText = `${name}'s Progress`;
+        document.getElementById('goalText').innerText = goal;
+    };
+</script>
+
+</body>
+</html>

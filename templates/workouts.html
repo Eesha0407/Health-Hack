@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Health Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container2">
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="healthhack">
+            <h1 class="logo" style="color: white;">HealthHack</h1>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html" style="color: white; text-decoration: none;">🏠 Dashboard</a></li>
+            <li><a href="nutrition.html" style="color: white; text-decoration: none;">🥗 Nutrition</a></li>
+            <li><a href="workouts.html" style="color: white; text-decoration: none;">💪 Safe Workouts</a></li>
+            <li><a href="injuries.html" style="color: white; text-decoration: none;">🩺 Injuries</a></li>
+            <li><a href="progress.html" style="color: white; text-decoration: none;">📊 Progress</a></li>
+            <li><a href="settings.html" style="color: white; text-decoration: none;">⚙️ Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content (blank for now) -->
+    <div class="main-content">
+        <h1>Welcome!</h1>
+        <div class="card" style="margin-top: 20px; padding: 20px; border-radius: 15px; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h3>Graph-Powered Injury Routing</h3>
+    <p>Select your current injury to find safe, AI-verified exercises:</p>
+    
+    <select id="injurySelect" style="padding: 10px; border-radius: 8px; border: 2px solid #ff4b2b; width: 100%; margin-bottom: 20px;">
+        <option value="No Injury">No Injury / General Fitness</option>
+        <option value="Knee Pain">Knee Pain</option>
+        <option value="Lower Back Pain">Lower Back Pain</option>
+        <option value="Wrist Pain">Wrist Pain</option>
+        <option value="Shoulder Injury">Shoulder Injury</option>
+    </select>
+
+    <div id="workoutResults" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+        </div>
+</div>
+    </div>
+
+</div>
+<script>
+
+// In the <script> at the bottom of dashboard.html, add this at the top:
+window.onload = function() {
+    const savedInjury = localStorage.getItem('userInjury');
+    if (savedInjury) {
+        const select = document.getElementById('injurySelect');
+        // If what they typed matches one of our options, select it!
+        if (["Knee Pain", "Lower Back Pain", "Wrist Pain", "Shoulder Injury"].includes(savedInjury)) {
+            select.value = savedInjury;
+        }
+        // Run the graph query automatically
+        fetchAndDisplayWorkouts();
+    }
+};
+
+    const injurySelect = document.getElementById('injurySelect');
+    const workoutResults = document.getElementById('workoutResults');
+
+    async function fetchAndDisplayWorkouts() {
+        const injury = injurySelect.value;
+        workoutResults.innerHTML = "<p>Analyzing graph topology...</p>";
+
+        try {
+            // This calls your Python server on port 5000
+            const response = await fetch(`http://127.0.0.1:5000/api/get_safe_workouts?injury=${encodeURIComponent(injury)}`);
+            const data = await response.json();
+            
+            workoutResults.innerHTML = ""; // Clear loading text
+
+            if (data.safe_exercises && data.safe_exercises.length > 0) {
+                // Replace the internal part of your data.safe_exercises.forEach loop with this:
+data.safe_exercises.forEach(ex => {
+    const card = document.createElement('div');
+    card.className = "exercise-card"; // This links it to the CSS above
+    card.innerText = ex;
+    workoutResults.appendChild(card);
+});
+            } else {
+                workoutResults.innerHTML = "<p>No safe exercises found for this injury.</p>";
+            }
+        } catch (error) {
+            console.error("Backend Error:", error);
+            workoutResults.innerHTML = "<p style='color: red;'>Error: Is the Python server (app.py) running?</p>";
+        }
+    }
+
+    // Run whenever the dropdown changes
+    injurySelect.addEventListener('change', fetchAndDisplayWorkouts);
+
+    // Run once on page load
+    fetchAndDisplayWorkouts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHack - Nutrition Insights</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for the nutrition layout */
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .diet-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid #00c9a7;
+        }
+        .insight-badge {
+            display: inline-block;
+            background: #e0f7f4;
+            color: #00c9a7;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .meal-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .error-banner {
+            background: #fff0f0;
+            color: #ff4d4d;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+            border: 1px solid #ffcccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container2">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="healthhack">
+            <h1 class="logo" style="color: white;">HealthHack</h1>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html" style="color: white; text-decoration: none;">🏠 Dashboard</a></li>
+            <li><a href="nutrition.html" style="color: white; text-decoration: none;">🥗 Nutrition</a></li>
+            <li><a href="workouts.html" style="color: white; text-decoration: none;">💪 Safe Workouts</a></li>
+            <li><a href="injuries.html" style="color: white; text-decoration: none;">🩺 Injuries</a></li>
+            <li><a href="progress.html" style="color: white; text-decoration: none;">📊 Progress</a></li>
+            <li><a href="settings.html" style="color: white; text-decoration: none;">⚙️ Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" style="padding: 40px; width: 100%;">
+        <div id="connectionError" class="error-banner">
+            ⚠️ <strong>Backend Offline:</strong> Displaying Demo Mode. Ensure <code>app.py</code> is running at <code>http://127.0.0.1:5000</code>.
+        </div>
+
+        <h1 id="welcomeUser">Nutrition Insights</h1>
+        <p class="subtitle">Personalized meal plans based on your preferences and fitness goals.</p>
+
+        <div class="nutrition-grid">
+            <!-- Diet Overview Card -->
+            <div class="diet-card">
+                <span class="insight-badge" id="goalTag">Goal: Loading...</span>
+                <h3 id="planTitle">Consulting Backend...</h3>
+                <p id="planDescription">Fetching the best meal options for your goal.</p>
+                
+                <div id="mealList">
+                    <!-- Meals injected here -->
+                </div>
+            </div>
+
+            <!-- Macro Breakdown Card -->
+            <div class="diet-card" style="border-top-color: #2d1674;">
+                <h3>Macro Distribution</h3>
+                <p>Tailored for your <span id="prefTag">...</span> lifestyle.</p>
+                <div id="macroBars" style="margin-top: 20px;">
+                    <div style="margin-bottom: 15px;">
+                        <span id="proteinLabel">Protein (0%)</span>
+                        <div style="background: #eee; height: 10px; border-radius: 5px;">
+                            <div id="proteinBar" style="background: #00c9a7; height: 100%; border-radius: 5px; width: 0%; transition: width 0.5s;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <span id="carbsLabel">Carbs (0%)</span>
+                        <div style="background: #eee; height: 10px; border-radius: 5px;">
+                            <div id="carbsBar" style="background: #2d1674; height: 100%; border-radius: 5px; width: 0%; transition: width 0.5s;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="fatsLabel">Fats (0%)</span>
+                        <div style="background: #eee; height: 10px; border-radius: 5px;">
+                            <div id="fatsBar" style="background: #ffcc00; height: 100%; border-radius: 5px; width: 0%; transition: width 0.5s;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Fallback Mock Data for Demo Safety (matches app.py logic)
+    const mockNutritionData = {
+        "Muscle Gain": {
+            "title": "High Protein Growth Plan",
+            "macros": {"protein": "45%", "carbs": "35%", "fats": "20%"},
+            "description": "Focusing on high protein sources to repair muscle tissue after your graph-optimized workouts.",
+            "meals": {
+                "Non-Vegetarian": ["Grilled Chicken Breast", "Greek Yogurt", "Lean Beef Stir-fry"],
+                "Vegan": ["Tofu Scramble", "Lentil Soup", "Tempeh Power Bowl"],
+                "Vegetarian": ["Paneer Tikka", "Sprouted Moong Salad", "Whey Protein Shake"]
+            }
+        },
+        "Weight Loss": {
+            "title": "Calorie Deficit Focus",
+            "macros": {"protein": "40%", "carbs": "20%", "fats": "40%"},
+            "description": "A balanced low-carb approach to maximize fat oxidation while maintaining satiety.",
+            "meals": {
+                "Non-Vegetarian": ["Baked Salmon with Asparagus", "Turkey Wrap", "Boiled Eggs"],
+                "Vegan": ["Chickpea Salad", "Zucchini Noodles", "Roasted Chickpeas"],
+                "Vegetarian": ["Moong Dal Chilla", "Low-fat Curd with Berries", "Vegetable Soup"]
+            }
+        },
+        "General Fitness": {
+            "title": "Balanced Maintenance Plan",
+            "macros": {"protein": "30%", "carbs": "40%", "fats": "30%"},
+            "description": "A sustainable mix of macronutrients to support energy levels for your daily activities.",
+            "meals": {
+                "Non-Vegetarian": ["Chicken Salad", "Tuna Sandwich", "Stir-fried Veggies"],
+                "Vegan": ["Quinoa Bowl", "Fruit Smoothie", "Hummus & Veggies"],
+                "Vegetarian": ["Brown Rice & Lentils", "Cottage Cheese Wrap", "Mixed Nut Mix"]
+            }
+        }
+    };
+
+    window.onload = async function() {
+        const name = localStorage.getItem('userName') || "User";
+        const preference = localStorage.getItem('userPreference') || "Vegetarian";
+        const goal = localStorage.getItem('userGoal') || "General Fitness";
+
+        document.getElementById('welcomeUser').innerText = `Nutrition for ${name}`;
+        document.getElementById('goalTag').innerText = `Goal: ${goal}`;
+        document.getElementById('prefTag').innerText = preference;
+
+        try {
+            // Attempt to fetch from Backend
+            const apiUrl = `http://127.0.0.1:5000/api/get_nutrition_tips?goal=${encodeURIComponent(goal)}&preference=${encodeURIComponent(preference)}`;
+            const response = await fetch(apiUrl);
+            
+            if (!response.ok) throw new Error("Backend Error");
+            
+            const data = await response.json();
+            updateUI(data);
+
+        } catch (error) {
+            console.warn("Failed to fetch from backend, using fallback data:", error);
+            document.getElementById('connectionError').style.display = 'block';
+            
+            // Fallback Logic
+            const fallbackPlan = mockNutritionData[goal] || mockNutritionData["General Fitness"];
+            const meals = fallbackPlan.meals[preference] || fallbackPlan.meals["Vegetarian"];
+            
+            updateUI({
+                title: fallbackPlan.title + " (Demo Mode)",
+                description: fallbackPlan.description,
+                macros: fallbackPlan.macros,
+                meals: meals
+            });
+        }
+    };
+
+    function updateUI(data) {
+        document.getElementById('planTitle').innerText = data.title;
+        document.getElementById('planDescription').innerText = data.description;
+        
+        const mealList = document.getElementById('mealList');
+        mealList.innerHTML = "";
+        data.meals.forEach(meal => {
+            const div = document.createElement('div');
+            div.className = 'meal-item';
+            div.innerHTML = `<span>${meal}</span> <span style="color: #00c9a7;">✔ Suggested</span>`;
+            mealList.appendChild(div);
+        });
+
+        // Update Macro Bars
+        document.getElementById('proteinBar').style.width = data.macros.protein;
+        document.getElementById('proteinLabel').innerText = `Protein (${data.macros.protein})`;
+        
+        document.getElementById('carbsBar').style.width = data.macros.carbs;
+        document.getElementById('carbsLabel').innerText = `Carbs (${data.macros.carbs})`;
+        
+        document.getElementById('fatsBar').style.width = data.macros.fats;
+        document.getElementById('fatsLabel').innerText = `Fats (${data.macros.fats})`;
+    }
+</script>
+
+</body>
+</html>

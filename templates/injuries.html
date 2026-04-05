@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHack - Injury Management</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .injury-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .injury-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid #ff4d4d;
+        }
+        .muscle-tag {
+            display: inline-block;
+            background: #fff5f5;
+            color: #ff4d4d;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin: 5px;
+            border: 1px solid #ffcccc;
+        }
+        .injury-selector {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #eee;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .status-badge {
+            background: #ff4d4d;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container2">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="healthhack">
+            <h1 class="logo" style="color: white;">HealthHack</h1>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html" style="color: white; text-decoration: none;">🏠 Dashboard</a></li>
+            <li><a href="nutrition.html" style="color: white; text-decoration: none;">🥗 Nutrition</a></li>
+            <li><a href="workouts.html" style="color: white; text-decoration: none;">💪 Safe Workouts</a></li>
+            <li><a href="injuries.html" style="color: white; text-decoration: none;">🩺 Injuries</a></li>
+            <li><a href="progress.html" style="color: white; text-decoration: none;">📊 Progress</a></li>
+            <li><a href="settings.html" style="color: white; text-decoration: none;">⚙️ Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" style="padding: 40px; width: 100%;">
+        <h1 id="injuryHeader">Injury Management</h1>
+        <p class="subtitle">Understand and manage your physical constraints using Knowledge Graph insights.</p>
+
+        <div class="injury-grid">
+            <!-- Current Active Injury Card -->
+            <div class="injury-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Active Constraint</h3>
+                    <span class="status-badge">Active</span>
+                </div>
+                <h1 id="currentInjuryDisplay" style="margin: 15px 0; color: #2d1674;">No Injury</h1>
+                <p>Your current activity routing is optimized to avoid aggravating this area.</p>
+                <div id="aggravatedList" style="margin-top: 15px;">
+                    <!-- Muscles will be listed here -->
+                </div>
+            </div>
+
+            <!-- Update Injury Card -->
+            <div class="injury-card" style="border-top-color: #2d1674;">
+                <h3>Change Focus</h3>
+                <p style="margin-bottom: 15px; font-size: 0.9rem;">Experiencing something new? Update your status to recalibrate the graph.</p>
+                
+                <select id="newInjurySelect" class="injury-selector">
+                    <option value="No Injury">No Injury</option>
+                    <option value="Lower Back Pain">Lower Back Pain</option>
+                    <option value="Knee Pain">Knee Pain</option>
+                    <option value="Wrist Pain">Wrist Pain</option>
+                    <option value="Shoulder Injury">Shoulder Injury</option>
+                    <option value="Neck Strain">Neck Strain</option>
+                    <option value="Tennis Elbow">Tennis Elbow</option>
+                    <option value="Ankle Sprain">Ankle Sprain</option>
+                </select>
+                
+                <button class="btn" style="width: 100%;" onclick="updateInjury()">Update Graph Context</button>
+            </div>
+
+            <!-- Insight Section -->
+            <div class="injury-card" style="grid-column: span 2; border-top-color: #ffcc00;">
+                <h3>Biological Relationships</h3>
+                <p>Based on our <strong>Knowledge Graph (Savanna 4.0)</strong>, these are the primary muscle groups affected by your current state.</p>
+                <div id="graphInsights" style="margin-top: 20px; display: flex; flex-wrap: wrap;">
+                    <!-- Insight tags -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Mock mapping based on your CSV structure (Injury -> Muscle)
+    const injuryMuscleMap = {
+        "Lower Back Pain": ["Lower Back"],
+        "Knee Pain": ["Quadriceps"],
+        "Wrist Pain": ["Forearms and Wrists"],
+        "Shoulder Injury": ["Deltoids", "Rotator Cuff"],
+        "Neck Strain": ["Trapezius"],
+        "Tennis Elbow": ["Forearms and Wrists"],
+        "Ankle Sprain": ["Calves"],
+        "No Injury": []
+    };
+
+    window.onload = function() {
+        const savedInjury = localStorage.getItem('userInjury') || "No Injury";
+        displayInjuryData(savedInjury);
+        document.getElementById('newInjurySelect').value = savedInjury;
+    };
+
+    function displayInjuryData(injury) {
+        document.getElementById('currentInjuryDisplay').innerText = injury;
+        
+        const aggravatedList = document.getElementById('aggravatedList');
+        const insights = document.getElementById('graphInsights');
+        aggravatedList.innerHTML = "";
+        insights.innerHTML = "";
+
+        const muscles = injuryMuscleMap[injury] || [];
+        
+        if (muscles.length > 0) {
+            muscles.forEach(m => {
+                const tag = document.createElement('span');
+                tag.className = 'muscle-tag';
+                tag.innerText = `⚠️ ${m}`;
+                aggravatedList.appendChild(tag);
+
+                const insightCard = document.createElement('div');
+                insightCard.style = "background: #fdfdfd; border: 1px solid #eee; padding: 15px; border-radius: 10px; margin: 10px; flex: 1; min-width: 200px;";
+                insightCard.innerHTML = `<strong>${m}</strong><br><small>Traversal path: Injury → Aggravates → ${m}</small>`;
+                insights.appendChild(insightCard);
+            });
+        } else {
+            aggravatedList.innerHTML = "<p style='color: #27ae60;'>✔ All muscle groups cleared for high-intensity training.</p>";
+            insights.innerHTML = "<p>Your profile currently has no relational constraints. All exercises from <code>exercises.csv</code> are accessible.</p>";
+        }
+    }
+
+    function updateInjury() {
+        const selected = document.getElementById('newInjurySelect').value;
+        localStorage.setItem('userInjury', selected);
+        displayInjuryData(selected);
+        
+        const btn = document.querySelector('.btn');
+        const oldText = btn.innerText;
+        btn.innerText = "Graph Updated! ✔";
+        btn.style.backgroundColor = "#27ae60";
+        setTimeout(() => {
+            btn.innerText = oldText;
+            btn.style.backgroundColor = "#00c9a7";
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>

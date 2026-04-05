@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHack - Settings</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for settings layout */
+        .settings-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 600px;
+        }
+        .settings-group {
+            margin-bottom: 20px;
+        }
+        .settings-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2d1674;
+        }
+        .settings-group input, .settings-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        .danger-zone {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid #ff4d4d;
+            border-radius: 12px;
+            background-color: #fff5f5;
+        }
+        .danger-zone h3 {
+            color: #ff4d4d;
+            margin-bottom: 10px;
+        }
+        .save-btn {
+            background-color: #00c9a7;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .save-btn:hover {
+            background-color: #00a78e;
+        }
+        .reset-btn {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container2">
+    <!-- Sidebar (Consistent with other pages) -->
+    <div class="sidebar">
+        <div class="healthhack">
+            <h1 class="logo" style="color: white;">HealthHack</h1>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html" style="color: white; text-decoration: none;">🏠 Dashboard</a></li>
+            <li><a href="nutrition.html" style="color: white; text-decoration: none;">🥗 Nutrition</a></li>
+            <li><a href="workouts.html" style="color: white; text-decoration: none;">💪 Safe Workouts</a></li>
+            <li><a href="injuries.html" style="color: white; text-decoration: none;">🩺 Injuries</a></li>
+            <li><a href="progress.html" style="color: white; text-decoration: none;">📊 Progress</a></li>
+            <li><a href="settings.html" style="color: white; text-decoration: none;">⚙️ Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" style="padding: 40px; width: 100%;">
+        <h1>Account Settings</h1>
+        <p class="subtitle">Update your profile and preferences for better AI recommendations.</p>
+
+        <div class="settings-card">
+            <div class="settings-group">
+                <label>Display Name</label>
+                <input type="text" id="setName" placeholder="Your Name">
+            </div>
+
+            <div class="settings-group">
+                <label>Food Preference</label>
+                <select id="setPref">
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Vegan">Vegan</option>
+                    <option value="Non-Vegetarian">Non-Vegetarian</option>
+                </select>
+            </div>
+
+            <div class="settings-group">
+                <label>Fitness Goal</label>
+                <select id="setGoal">
+                    <option value="Weight Loss">Weight Loss</option>
+                    <option value="Muscle Gain">Muscle Gain</option>
+                    <option value="General Fitness">General Fitness</option>
+                    <option value="Rehabilitation">Rehabilitation</option>
+                </select>
+            </div>
+
+            <button class="save-btn" onclick="saveSettings()">Save Changes</button>
+
+            <div class="danger-zone">
+                <h3>Danger Zone</h3>
+                <p>Clearing data will reset your injury logs and profile information.</p>
+                <button class="reset-btn" onclick="resetData()">Reset All Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        // Load current settings from localStorage
+        document.getElementById('setName').value = localStorage.getItem('userName') || "";
+        document.getElementById('setPref').value = localStorage.getItem('userPreference') || "Vegetarian";
+        document.getElementById('setGoal').value = localStorage.getItem('userGoal') || "General Fitness";
+    };
+
+    function saveSettings() {
+        const name = document.getElementById('setName').value;
+        const pref = document.getElementById('setPref').value;
+        const goal = document.getElementById('setGoal').value;
+
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userPreference', pref);
+        localStorage.setItem('userGoal', goal);
+
+        // Simple notification (since we avoid alerts)
+        const btn = document.querySelector('.save-btn');
+        const originalText = btn.innerText;
+        btn.innerText = "Saved! ✔";
+        btn.style.backgroundColor = "#27ae60";
+        
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.backgroundColor = "#00c9a7";
+        }, 2000);
+    }
+
+    function resetData() {
+        if (confirm("Are you sure? This will delete your profile and redirect to the start.")) {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+    }
+</script>
+
+</body>
+</html>
