@@ -6,13 +6,25 @@ HealthHack 2.0 is a next-generation fitness and health-tech application by team 
 
 ---
 
+## 📸 Project Visuals
+
+| **Interactive Dashboard** | **TigerGraph Design Schema** |
+| :---: | :---: |
+| ![Dashboard](Images/Dashboard.png) | ![TigerGraph Schema](Images/tigergraph.png) |
+
+### 🛠️ The Pruning Engine: Precision Training
+The system utilizes GSQL traversal to map relationships between 15+ injury types, muscle groups, and specific exercises to ensure real-time safety recalibration.
+
+![HealthHack 2.0 Infographic](Images/InfoGraphics.png)
+
+---
+
 ## ✨ Core Features
 
 ### 1. TigerGraph-Powered Safe Workout Routing
 We have moved beyond conceptual routing. HealthHack 2.0 now actively queries a live TigerGraph database via a Python/Flask REST API. 
 * 🟢 **Safe Exercises:** The graph dynamically returns exercises verified as safe based on the user's specific injury nodes.
 * 🔴 **Pruned Contraindications:** Aggravating exercises are automatically filtered out of the user's dashboard based on graph traversal logic.
-
 ### 2. Interactive Web Dashboard
 A clean, accessible user journey that captures essential biometrics, dietary preferences, and injury data. The application maintains state dynamically, updating workout recommendations and health scores in real-time as the user's physical constraints change.
 
