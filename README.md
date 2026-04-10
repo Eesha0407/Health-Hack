@@ -20,7 +20,7 @@ A clean, accessible user journey that captures essential biometrics, dietary pre
 Personalized macronutrient breakdowns and meal plans generated dynamically based on the user's primary fitness goal (e.g., Muscle Gain, Weight Loss, Rehabilitation) and dietary preferences (Vegan, Vegetarian, Non-Vegetarian).
 
 ### 4. Injury Context Management
-Users can update their active injuries (e.g., "Knee Pain", "Lower Back Pain"), instantly recalibrating the Knowledge Graph to route around the affected muscle groups and update the daily training plan.
+Users can update their active injuries (e.g., "Knee Pain", "Lower Back Pain", "Neck Strain"), instantly recalibrating the Knowledge Graph to route around the affected muscle groups and update the daily training plan.
 
 ---
 
