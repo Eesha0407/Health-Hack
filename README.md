@@ -78,8 +78,8 @@ Simply double-click on `index.html` to open it in your browser (Chrome, Firefox,
 | :--- | :--- | :--- |
 | **Ananya** | Lead Developer (AI & Graph) | Python/Flask backend integration, TigerGraph Cloud API routing, and AI implementation. |
 | **Eesha** | Frontend Engineer | Dashboard development, UI forms for injury logging, and repository management. |
-| **Ishvi** | Product Lead & Pitch | Market research on injury prevention, PPT design (focusing on the "Why Graph"), and project documentation. |
-| **Aashi** | UI/UX & Integration | "Health Map" visualization design, CSS styling, UI layout, and end-to-end testing for the demo. |
+| **Ishvi** | Product Lead & Pitch | Market research on injury prevention and project documentation. |
+| **Aashi** | UI/UX & Integration | Visualization design, , PPT design (focusing on the "Why Graph"), and end-to-end testing for the demo. |
 
 ---
 *Built with ❤️ by ByteFours*
