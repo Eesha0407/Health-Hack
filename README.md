@@ -1,6 +1,6 @@
 # 🧬 HealthHack 2.0: The Graph Edition
 
-> **Train Smarter. Not Harder. Powered by Medical-Grade Graph Intelligence.**
+> **Train Smarter. Not Harder... Powered by Medical-Grade Graph Intelligence.**
 
 HealthHack 2.0 is a next-generation fitness and health-tech application by team **ByteNova**. Unlike generic fitness trackers, HealthHack 2.0 acts as a **"Graph-powered decision engine for safe training."** It uses an active Knowledge Graph (TigerGraph) to dynamically analyze a user's biometric data, fitness goals, and active injuries to prune contraindicated exercises and route them to safe alternatives.
 
